@@ -37,6 +37,16 @@ public class MainActivity extends AppCompatActivity {
                 mythread t4=new mythread("d",4);
                 mythread t5=new mythread("e",5);
                 t1.start();
+                try {
+                    t1.join();//等1跑完，其他再執行
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                /*try {
+                    mythread.sleep(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }*/
                 t2.start();
                 t3.start();
                 t4.start();
