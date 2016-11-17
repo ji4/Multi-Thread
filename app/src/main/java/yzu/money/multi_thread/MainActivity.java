@@ -1,5 +1,6 @@
 package yzu.money.multi_thread;
 
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,23 @@ public class MainActivity extends AppCompatActivity {
     ImageView iv;
     int img=0;
     int []A={R.drawable.p1, R.drawable.p2};
+    Handler handler=new Handler();//管理程式執行
+    Runnable runnable=new Runnable() {
+        @Override
+        public void run() {
+            iv=(ImageView) findViewById(R.id.imageView);
+            iv.setImageResource(A[img]);
+            img=(img+1)%2;
+            handler.postDelayed(this,100);
+        }
+    };//沒有變數名稱的宣告方式
+
+    @Override
+    protected void onDestroy() {
+        if(handler!=null) handler.removeCallbacks(runnable);
+        super.onDestroy();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,10 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                iv=(ImageView) findViewById(R.id.imageView);
-                //iv.setImageResource(R.drawable.p1);
-                iv.setImageResource(A[img]);
-                img=(img+1)%2;
+                handler.postDelayed(runnable,30);
 
                 System.out.println("test");
                 //Log.i("money","test");
@@ -72,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
         public mythread(String name, int id) {//constructor
             super(name);
             this.id = id;
-
         }
 
         @Override
