@@ -1,6 +1,7 @@
 package yzu.money.multi_thread;
 
 import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,7 +15,14 @@ public class MainActivity extends AppCompatActivity {
     ImageView iv;
     int img=0;
     int []A={R.drawable.p1, R.drawable.p2};
-    Handler handler=new Handler();//管理程式執行
+    //Handler handler=new Handler();//管理程式執行
+    Handler handler = new Handler()
+    {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+        }
+    };
     Runnable runnable=new Runnable() {
         @Override
         public void run() {
@@ -87,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         public mythread(String name, int id) {//constructor
             super(name);
             this.id = id;
+            handler.sendEmptyMessage(0);
         }
 
         @Override
