@@ -6,9 +6,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
     Button btngo;
+    ImageView iv;
+    int img=0;
+    int []A={R.drawable.p1, R.drawable.p2};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +22,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                
+                iv=(ImageView) findViewById(R.id.imageView);
+                //iv.setImageResource(R.drawable.p1);
+                iv.setImageResource(A[img]);
+                img=(img+1)%2;
+
                 System.out.println("test");
                 //Log.i("money","test");
                 //way1
