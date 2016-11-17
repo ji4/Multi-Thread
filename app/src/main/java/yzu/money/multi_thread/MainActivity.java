@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                
                 System.out.println("test");
                 //Log.i("money","test");
                 //way1
@@ -51,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
                 t3.start();
                 t4.start();
                 t5.start();
+
+                Thread r=new Thread(new myRunable(6));
+                r.start();
             }
         });
     }
@@ -66,6 +70,19 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             super.run();
+            int i;
+            for(i=0;i<100;i++)
+                System.out.println("id: "+id+", i: "+i);
+        }
+    }
+    class myRunable implements Runnable{
+        int id;
+        public myRunable(int id) {//constroctor
+            this.id=id;
+        }
+
+        @Override
+        public void run() {
             int i;
             for(i=0;i<100;i++)
                 System.out.println("id: "+id+", i: "+i);
